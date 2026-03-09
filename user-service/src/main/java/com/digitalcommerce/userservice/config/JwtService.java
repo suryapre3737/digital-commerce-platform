@@ -26,7 +26,9 @@ public class JwtService {
                 .setClaims(claims)
                 .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
+                //.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
+                //change later to 30 mins
+                .setExpiration(new Date(System.currentTimeMillis() + 100000 * 60 * 30))
                 .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret)), SignatureAlgorithm.HS256)
                 .compact();
     }//read more
@@ -38,7 +40,7 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
-    }//read more
+    }
 
     private Boolean isTokenExpired(String token) {
         return Jwts.parserBuilder()
@@ -48,11 +50,11 @@ public class JwtService {
                 .getBody()
                 .getExpiration()
                 .before(new Date());
-    }//read more
+    }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-    }//read more
+    }
 
 }
