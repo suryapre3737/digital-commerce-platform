@@ -2,7 +2,6 @@ package com.digitalcommerce.orderservice.controller;
 
 import com.digitalcommerce.orderservice.dto.requestdtos.CreateOrderRequest;
 import com.digitalcommerce.orderservice.service.OrderService;
-import com.digitalcommerce.orderservice.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class OrdersController {
 
     private final OrderService orderService;
-
-    private final StudentService studentService12;
 
     @GetMapping
     public ResponseEntity<?> getOrderDetails(@RequestParam Long orderId){
